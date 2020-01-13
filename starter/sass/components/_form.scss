@@ -1,0 +1,118 @@
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    border-bottom: 3px solid transparent; //underline to not make active underline make elements jump
+    width: 100%;
+    display: block;
+    transition: all 0.3s;
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    //taking advantage of chrome field validation
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark; //underline
+    }
+
+    &:focus {
+      // when input field is clicked on
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary; //underline
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block; //stacked on top of input because of this element
+    transition: all 0.3s; // why transition here??
+  }
+
+  //making text jump from placeholder to bottom of input
+  // + adjacent sibling
+  // ~ other sibling below
+  &__input:placeholder-shown + &__label {
+    opacity: 0; //cant animate visibility
+    visibility: hidden;
+    transform: translateY(
+      -4rem
+    ); //because parent transition controlls child transform
+  }
+
+  &__radio-group {
+    width: 45%;
+    display: inline-block;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+
+    //top properties wont work if we dont use block or inline block
+    display: inline-block;
+
+    //for this position to work, parent needs to be position relative
+    position: absolute;
+
+    left: 0;
+    top: -0.4rem;
+
+    &::after {
+      //each time we use a pseudo element?? we specify content and display
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+
+      //for circle
+      border-radius: 50%;
+
+      //for center positioning
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+
+      //to make circles initially empty
+      opacity: 0%;
+
+      transition: opacity 0.2s;
+    }
+  }
+
+  //to show little dot on custom button
+  //see elements positions on why selected like this
+  //we want to change the element inside adjcenent element of radio-input
+  &__radio-input:checked + &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+
+  //removes it from view instead of hidding it
+  &__radio-input {
+    display: none;
+  }
+}
