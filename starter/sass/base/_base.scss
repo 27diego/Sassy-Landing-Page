@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before {
+  /* overwritting orignal margin and padding from standard html */
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  //defines what 1rem is
+  font-size: 10px;
+}
+body {
+  /* line up box model */
+  box-sizing: border-box;
+}
