@@ -49,9 +49,13 @@
     }
   }
 
+  //essentially there are two cards that are behind and infront of eachother
+  //rotating the front side of card
   &:hover &__side--front {
     transform: rotateY(-180deg);
   }
+
+  //rotating the back side of card
   &:hover &__side--back {
     transform: rotateY(0deg);
   }
